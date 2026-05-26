@@ -5,6 +5,7 @@ import { ProductsGrid } from "@/components/ProductsGrid";
 import { BrandsMarquee } from "@/components/BrandsMarquee";
 import { ProcessCTA } from "@/components/ProcessCTA";
 import { SiteFooter } from "@/components/SiteFooter";
+import { LoadingSplash } from "@/components/LoadingSplash";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background">
+      <LoadingSplash />
       <SiteHeader />
       <main>
         <Hero />
