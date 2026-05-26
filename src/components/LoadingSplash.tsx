@@ -14,7 +14,7 @@ export function LoadingSplash() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setShow(false), 2800);
+    const t = setTimeout(() => setShow(false), 5000);
     return () => clearTimeout(t);
   }, []);
 
