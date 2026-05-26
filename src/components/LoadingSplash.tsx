@@ -27,27 +27,28 @@ export function LoadingSplash() {
           transition={{ duration: 0.7, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] overflow-hidden bg-background"
         >
-          {/* Blurred background collage */}
-          <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-2 p-2 scale-110">
+          {/* Real roof product images collage */}
+          <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-1">
             {images.map((src, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 1.2 }}
+                initial={{ opacity: 0, scale: 1.15 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.08, duration: 0.8 }}
-                className="relative overflow-hidden rounded-2xl"
+                transition={{ delay: i * 0.1, duration: 1 }}
+                className="relative overflow-hidden"
               >
                 <img
                   src={src}
                   alt=""
-                  className="w-full h-full object-cover blur-2xl scale-125 opacity-70"
+                  className="w-full h-full object-cover blur-[3px] scale-105"
                 />
               </motion.div>
             ))}
           </div>
 
-          {/* Color wash */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-background/70 to-accent/50 backdrop-blur-xl" />
+          {/* Subtle brand wash so logo stays readable */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-background/30 to-accent/40" />
+          <div className="absolute inset-0 bg-background/20" />
 
           {/* Animated rain lines */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
