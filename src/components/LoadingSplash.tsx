@@ -103,61 +103,59 @@ export function LoadingSplash() {
               </p>
             </motion.div>
 
-            {/* Roof-building loading symbol */}
-            <div className="mt-10 flex flex-col items-center gap-3">
-              <svg width="110" height="80" viewBox="0 0 110 80" className="overflow-visible">
-                {/* House base */}
-                <motion.rect
-                  x="20" y="45" width="70" height="30"
-                  fill="none"
-                  stroke="hsl(var(--foreground))"
-                  strokeWidth="2.5"
-                  strokeOpacity="0.25"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1, repeat: Infinity, repeatDelay: 1.8, ease: "easeInOut" }}
-                />
-                {/* Roof left slope */}
-                <motion.line
-                  x1="15" y1="48" x2="55" y2="18"
-                  stroke="hsl(var(--primary))"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.7, delay: 0.2, repeat: Infinity, repeatDelay: 2.1, ease: "easeOut" }}
-                />
-                {/* Roof right slope */}
-                <motion.line
-                  x1="55" y1="18" x2="95" y2="48"
-                  stroke="hsl(var(--accent))"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.7, delay: 0.9, repeat: Infinity, repeatDelay: 2.1, ease: "easeOut" }}
-                />
-                {/* Shingle tiles dropping in */}
-                {[0, 1, 2, 3].map((i) => (
-                  <motion.rect
-                    key={i}
-                    x={28 + i * 14} y="52" width="10" height="6" rx="1"
-                    fill="hsl(var(--accent))"
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: 52, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1.6 + i * 0.15, repeat: Infinity, repeatDelay: 2.3 - i * 0.15, ease: "easeIn" }}
+            {/* Roof symbol spinner */}
+            <div className="mt-10 flex flex-col items-center gap-4">
+              <div className="relative w-24 h-24 flex items-center justify-center">
+                {/* Rotating circular track */}
+                <motion.svg
+                  viewBox="0 0 100 100"
+                  className="absolute inset-0 w-full h-full"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }}
+                >
+                  <circle
+                    cx="50" cy="50" r="44"
+                    fill="none"
+                    stroke="hsl(var(--accent))"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeDasharray="60 220"
                   />
-                ))}
-                {/* Chimney */}
-                <motion.rect
-                  x="72" y="22" width="8" height="14"
-                  fill="hsl(var(--primary))"
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  animate={{ scaleY: 1, opacity: 1 }}
-                  style={{ transformOrigin: "76px 36px" }}
-                  transition={{ duration: 0.4, delay: 1.4, repeat: Infinity, repeatDelay: 2.4, ease: "backOut" }}
-                />
-              </svg>
+                </motion.svg>
+
+                {/* Pulsing roof/house icon in the center */}
+                <motion.svg
+                  viewBox="0 0 64 64"
+                  className="relative w-12 h-12"
+                  animate={{ scale: [1, 1.12, 1] }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  {/* Roof triangle */}
+                  <motion.path
+                    d="M6 34 L32 10 L58 34"
+                    fill="none"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: [0, 1, 1] }}
+                    transition={{ duration: 1.6, times: [0, 0.6, 1], repeat: Infinity, ease: "easeInOut" }}
+                  />
+                  {/* House body */}
+                  <motion.path
+                    d="M12 32 L12 54 L52 54 L52 32"
+                    fill="none"
+                    stroke="hsl(var(--accent))"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: [0, 0, 1] }}
+                    transition={{ duration: 1.6, times: [0, 0.4, 1], repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </motion.svg>
+              </div>
               <motion.p
                 className="text-xs uppercase tracking-[0.25em] text-muted-foreground"
                 animate={{ opacity: [0.4, 1, 0.4] }}
@@ -166,6 +164,7 @@ export function LoadingSplash() {
                 Building your roof…
               </motion.p>
             </div>
+
           </div>
         </motion.div>
       )}
