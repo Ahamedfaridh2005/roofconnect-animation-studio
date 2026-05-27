@@ -103,59 +103,51 @@ export function LoadingSplash() {
               </p>
             </motion.div>
 
-            {/* Roof symbol spinner */}
+            {/* Roof-drawing loader: continuously draws and erases a roof outline */}
             <div className="mt-10 flex flex-col items-center gap-4">
-              <div className="relative w-24 h-24 flex items-center justify-center">
-                {/* Rotating circular track */}
-                <motion.svg
-                  viewBox="0 0 100 100"
-                  className="absolute inset-0 w-full h-full"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }}
-                >
-                  <circle
-                    cx="50" cy="50" r="44"
-                    fill="none"
-                    stroke="hsl(var(--accent))"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeDasharray="60 220"
-                  />
-                </motion.svg>
-
-                {/* Pulsing roof/house icon in the center */}
-                <motion.svg
-                  viewBox="0 0 64 64"
-                  className="relative w-12 h-12"
-                  animate={{ scale: [1, 1.12, 1] }}
-                  transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  {/* Roof triangle */}
-                  <motion.path
-                    d="M6 34 L32 10 L58 34"
-                    fill="none"
-                    stroke="hsl(var(--primary))"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: [0, 1, 1] }}
-                    transition={{ duration: 1.6, times: [0, 0.6, 1], repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  {/* House body */}
-                  <motion.path
-                    d="M12 32 L12 54 L52 54 L52 32"
-                    fill="none"
-                    stroke="hsl(var(--accent))"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: [0, 0, 1] }}
-                    transition={{ duration: 1.6, times: [0, 0.4, 1], repeat: Infinity, ease: "easeInOut" }}
-                  />
-                </motion.svg>
-              </div>
+              <svg
+                viewBox="0 0 120 90"
+                className="w-28 h-20 overflow-visible"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                {/* Faint guide */}
+                <path
+                  d="M10 55 L60 12 L110 55 L110 82 L10 82 Z"
+                  stroke="hsl(var(--foreground))"
+                  strokeOpacity="0.08"
+                  strokeWidth="2"
+                />
+                {/* Animated roof outline — draws then erases on loop */}
+                <motion.path
+                  d="M10 55 L60 12 L110 55 L110 82 L10 82 Z"
+                  stroke="hsl(var(--accent))"
+                  strokeWidth="3.5"
+                  initial={{ pathLength: 0, pathOffset: 0 }}
+                  animate={{ pathLength: [0, 1, 1, 0], pathOffset: [0, 0, 0, 1] }}
+                  transition={{
+                    duration: 2.4,
+                    times: [0, 0.45, 0.55, 1],
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                {/* Ridge highlight that traces the roof peak */}
+                <motion.path
+                  d="M10 55 L60 12 L110 55"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="3.5"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: [0, 1, 1, 0] }}
+                  transition={{
+                    duration: 2.4,
+                    times: [0, 0.35, 0.55, 0.95],
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </svg>
               <motion.p
                 className="text-xs uppercase tracking-[0.25em] text-muted-foreground"
                 animate={{ opacity: [0.4, 1, 0.4] }}
@@ -164,6 +156,7 @@ export function LoadingSplash() {
                 Building your roof…
               </motion.p>
             </div>
+
 
           </div>
         </motion.div>
