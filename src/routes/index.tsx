@@ -7,6 +7,8 @@ import { ProcessCTA } from "@/components/ProcessCTA";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LoadingSplash } from "@/components/LoadingSplash";
 
+import roofBg from "@/assets/user_roof_bg.jpg";
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -21,10 +23,19 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen text-white relative overflow-x-hidden">
+      {/* Real Roof Products Background */}
+      <div className="fixed inset-0 z-[-10] overflow-hidden pointer-events-none bg-black">
+        <img
+          src={roofBg}
+          alt="Roof Products Background"
+          className="w-full h-full object-cover opacity-75"
+        />
+      </div>
+
       <LoadingSplash />
       <SiteHeader />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <ProductsGrid />
         <BrandsMarquee />
